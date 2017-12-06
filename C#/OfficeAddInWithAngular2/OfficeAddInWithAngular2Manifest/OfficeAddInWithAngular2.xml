@@ -17,8 +17,8 @@
   <ProviderName>[Provider name]</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-  <DisplayName DefaultValue="OfficeAddInWithAngular2" />
-  <Description DefaultValue="OfficeAddInWithAngular2"/>
+  <DisplayName DefaultValue="Finbourne Excel 2016 Demo" />
+  <Description DefaultValue="Finbourne Excel 2016 Demo"/>
 
   <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
   <IconUrl DefaultValue="https://localhost:44346/public/images/Button32x32.png" />

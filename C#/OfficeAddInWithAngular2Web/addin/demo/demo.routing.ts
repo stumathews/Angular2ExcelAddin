@@ -1,8 +1,7 @@
-import { Routes,
-    RouterModule }  from '@angular/router';
+import { Routes, RouterModule }  from '@angular/router';
 
-import {OverviewComponent} from './overview.component';
-import {OfficeInteractionComponent} from './office-interaction.component';
+import { OverviewComponent } from './overview.component';
+import  {OfficeInteractionComponent } from './office-interaction.component';
 
 export const routes: Routes = [
     {

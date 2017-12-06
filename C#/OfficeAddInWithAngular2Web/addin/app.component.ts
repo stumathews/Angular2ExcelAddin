@@ -7,12 +7,14 @@
 })
 
 export class AppComponent implements OnInit {
-    title: string = 'Angular 2 Excel Add-in';
+    title: string = 'Finbourne Excel Plugin';
 
-    constructor() {
+    constructor()
+    {
 
     }
 
-    ngOnInit() {
+    ngOnInit()
+    {
     }
 }
