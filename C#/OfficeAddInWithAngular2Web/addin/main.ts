@@ -5,10 +5,10 @@ import { AppModule }              from './app.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { enableProdMode } from '@angular/core';
 
-enableProdMode();
+//enableProdMode();
 
 //use this to run in browser for dev
-//platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule);
 
 //bootstrap with Office.js for in Office
   Office.initialize = () => {

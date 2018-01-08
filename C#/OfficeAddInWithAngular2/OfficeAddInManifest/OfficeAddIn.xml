@@ -127,14 +127,14 @@
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="show sample add-in" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show Finbourne Plugin" />
         <bt:String id="Contoso.Group1Label" DefaultValue="Add-ins" />
-        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
+        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with Finbourne Plugin" />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="show sample add-in" />
-        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
+        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Show Finbourne Plugin" />
+        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Finbourne add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

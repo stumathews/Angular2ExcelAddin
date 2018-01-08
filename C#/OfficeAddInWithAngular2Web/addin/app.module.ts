@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { OfficeUiModule } from './office-ui/office-ui.module';
-import { DemoModule } from './demo/demo.module';
+import { PluginModule as PluginModule } from './app/plugin.module';
+import { CookieModule } from 'ngx-cookie';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
-    imports: [ BrowserModule, RouterModule, OfficeUiModule, DemoModule ],
-    declarations: [ AppComponent ],
+    declarations: [AppComponent],
+    imports: [BrowserModule, HttpModule, CookieModule.forRoot(), RouterModule, OfficeUiModule, PluginModule],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

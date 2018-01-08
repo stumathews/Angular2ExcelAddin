@@ -1,7 +1,11 @@
 import { Routes, RouterModule }  from '@angular/router';
 
-import { OverviewComponent } from './overview.component';
-import  {OfficeInteractionComponent } from './office-interaction.component';
+import { OverviewComponent } from './overview';
+import { OfficeInteractionComponent } from './office-interaction.component';
+
+import { PortfoliosComponent } from './portfolios/portfolios.component';
+
+
 
 export const routes: Routes = [
     {
@@ -16,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'office',
         component: OfficeInteractionComponent
+    },
+    {
+        path: 'Portfolios',
+        component: PortfoliosComponent
     }
 ];
 

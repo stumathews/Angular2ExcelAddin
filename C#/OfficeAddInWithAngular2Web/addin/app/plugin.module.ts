@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { demoRouting } from './demo.routing';
-import { OverviewComponent } from './overview.component';
+import { demoRouting } from './app.routing';
+import { OverviewComponent } from './overview';
 import { OfficeInteractionComponent } from './office-interaction.component';
 import { OfficeModule } from '../office/office.module';
 import { OfficeUiModule } from '../office-ui/office-ui.module';
 import { ExcelService } from '../office/excel.service';
+import { PortfoliosComponent } from './portfolios/portfolios.component';
+import { ApiService } from './apiService';
+
+
+
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule, demoRouting, OfficeModule, OfficeUiModule],
-  providers: [ ExcelService ],
-  declarations: [ OverviewComponent, OfficeInteractionComponent ],
+    imports: [BrowserModule, FormsModule, demoRouting, OfficeModule, OfficeUiModule],
+    providers: [ExcelService, ApiService ],
+  declarations: [ OverviewComponent, OfficeInteractionComponent, PortfoliosComponent ],
   exports: [ OverviewComponent, OfficeInteractionComponent ]
 })
-export class DemoModule { }
+export class PluginModule { }
