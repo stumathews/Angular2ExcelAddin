@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ExcelService } from '../office/excel.service';
-import { IOfficeResult } from '../office/ioffice-result';
+import {ExcelService } from '../../office/excel.service';
+import { IOfficeResult } from '../../office/ioffice-result';
 
 @Component({
     moduleId: module.id,

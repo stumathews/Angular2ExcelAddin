@@ -71,11 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="addin\app.component.html" />
-    <TypeScriptCompile Include="addin\app\apiService.ts" />
-    <Content Include="addin\app\office-interaction.component.html" />
-    <Content Include="addin\app\overview.html" />
-    <Content Include="addin\app\portfolios\portfolios.component.css" />
-    <Content Include="addin\app\portfolios\portfolios.component.html" />
+    <TypeScriptCompile Include="addin\plugin\apiService.ts" />
+    <Content Include="addin\plugin\OfficeInteraction\office-interaction.component.css" />
+    <Content Include="addin\plugin\OfficeInteraction\office-interaction.component.html" />
+    <Content Include="addin\plugin\Overview\overview.html" />
+    <Content Include="addin\plugin\Portfolios\portfolios.component.html" />
     <Content Include="addin\office-ui\back-button.component.css" />
     <Content Include="addin\office-ui\back-button.component.html" />
     <Content Include="addin\office-ui\command-bar.component.css" />
@@ -350,13 +350,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="addin\app.component.ts" />
     <TypeScriptCompile Include="addin\app.module.ts" />
-    <TypeScriptCompile Include="addin\app\Models\EntityTypes.ts" />
-    <TypeScriptCompile Include="addin\app\Models\LoginData.ts" />
-    <TypeScriptCompile Include="addin\app\plugin.module.ts" />
-    <TypeScriptCompile Include="addin\app\app.routing.ts" />
-    <TypeScriptCompile Include="addin\app\office-interaction.component.ts" />
-    <TypeScriptCompile Include="addin\app\overview.ts" />
-    <TypeScriptCompile Include="addin\app\portfolios\portfolios.component.ts" />
+    <TypeScriptCompile Include="addin\plugin\Models\EntityTypes.ts" />
+    <TypeScriptCompile Include="addin\plugin\Models\LoginData.ts" />
+    <TypeScriptCompile Include="addin\plugin\plugin.module.ts" />
+    <TypeScriptCompile Include="addin\app.routing.ts" />
+    <TypeScriptCompile Include="addin\plugin\OfficeInteraction\office-interaction.component.ts" />
+    <TypeScriptCompile Include="addin\plugin\Overview\overview.ts" />
+    <TypeScriptCompile Include="addin\plugin\Portfolios\portfolios.component.ts" />
     <TypeScriptCompile Include="addin\main.ts" />
     <TypeScriptCompile Include="addin\office-ui\back-button.component.ts" />
     <TypeScriptCompile Include="addin\office-ui\command-bar.component.ts" />

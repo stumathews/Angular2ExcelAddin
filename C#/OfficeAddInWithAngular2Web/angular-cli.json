@@ -17,7 +17,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "plugin",
       "styles": [
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",

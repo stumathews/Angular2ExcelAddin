@@ -4,13 +4,11 @@ import { Component, OnInit } from '@angular/core';
   moduleId: module.id,
   selector: 'app-portfolios',
   templateUrl: './portfolios.component.html',
-  styleUrls: ['./portfolios.component.css']
 })
 export class PortfoliosComponent implements OnInit {
+    title: string = "List portfolios";
+    description: string = 'These are the portfolios';
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

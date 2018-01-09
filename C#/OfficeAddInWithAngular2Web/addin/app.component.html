@@ -1,4 +1,5 @@
 ﻿<div id="container" class="ms-font-m">
+    <!-- Common Header-->
     <div class="ms-Grid">
         <div class="ms-Grid-row ms-fontColor-white">
             <div class="ms-Grid-col ms-u-sm12 ">
@@ -6,9 +7,18 @@
             </div>
         </div>
     </div>
+
+    <!-- SPA pages outlet -->
     <router-outlet></router-outlet>
-    Links
-    <li *ngFor="let detail of details">
-        <a class="ms-link" [routerLink]="[detail.route]">{{detail.title}}</a>
-    </li>
+
+    <!-- Nav menu -->
+    <div class="ms-Grid-row">
+        <div class="ms-Grid-col ms-u-sm12">
+            <ul class="ms-List">
+                <li *ngFor="let route of navRoutes">
+                    <a class="ms-link" [routerLink]="[route.path]">{{route.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
