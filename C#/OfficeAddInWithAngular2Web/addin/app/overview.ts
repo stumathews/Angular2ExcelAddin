@@ -25,11 +25,13 @@ export class OverviewComponent implements OnInit  {
         }
     ];
 
-    constructor(private CookieService: CookieService) {
+    constructor(private CookieService: CookieService,
+                private ApiService: ApiService) {
 
     }
 
     ngOnInit() {
+        
         this.CookieService.put("OverviewComponent", "I'm in!");
     }
     

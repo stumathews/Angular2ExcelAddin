@@ -21,6 +21,121 @@ export class ApiService {
     private ClientId = '0oa5al4bjt4whCMht2p6';
     private BaseUrl = 'https://api-am-prod.finbourne.com/v1/api';
     private AggregationUrlEndpoint = this.BaseUrl + '/aggregation';
+
+           
+    //Aggregate data from a result set          
+    private AggregateFromResultUrl = this.AggregationUrlEndpoint + '/results/{scope}/{resultsKey}/{resultsDate}';
+    // Aggregate data from a result set into a nested structure            
+    private AggregatefromResultIntoNested = this.AggregationUrlEndpoint + '/results/nested/{scope}/{resultsKey}/{resultsDate}';
+    // Aggregate data in a group hierarchy                
+    private AggregateInGroupHierachy = this.AggregationUrlEndpoint + '/groups/{scope}/{groupName}';
+    // Aggregation request data in a group hierarchy into a data tree           
+    private AggregateInGroupHierachyTree = this.AggregationUrlEndpoint + '/groups/nested/{scope}/{groupName}';
+    // Aggregate data in a portfolio                 
+    private AggregatePorfolio= this.AggregationUrlEndpoint + '/portfolios/{scope}/{portfolioId}';
+    // Aggregation request data in a portfolio into a data tree 
+    private AggregateportfolioTree = this.AggregationUrlEndpoint + '/portfolios/nested/{scope}/{portfolioId}';
+
+    /*
+    Create a new analytic store for the given scope for the given date         		DeletedEntityResponse, IErrorResponse	/v1/api/analytics/{scope}/{date}
+GetAnalyticStore                  		GetAnalyticStoreResponse	/v1/api/analytics/{scope}/{date}
+ListAnalyticStores                		IErrorResponse	/v1/api/analytics
+CreateAnalyticStore         		CreateAnalyticStoreResponse, IErrorResponse	/v1/api/analytics/{scope}/{date}
+InsertAnalytics         	SecurityAnalyticData	IErrorResponse	/v1/api/analytics/{scope}/{date}/prices
+
+GetCurrentAssemblyVersion                 			/v1/api/metadata/version
+GetCurrenBuildVersion                 			/v1/api/metadata/buildversion
+GetCurrentConnectivity                			/v1/api/metadata/verifyconnectivity
+
+Update classification data                   	SecurityClassificationData[]		/v1/api/classifications
+
+                     			/v1/api/excel/latest-version
+                     			/v1/api/excel/download-token
+
+Simple heartbeat method for the api                			/v1/api/health
+
+Gets the login information.                  			/v1/api/login
+
+Store a log message                  	WebLogMessage		/v1/api/logs/lusidweb
+
+Delete a personalisation at a specific scope (or use scope ALL to purge the setting entirely)      			/v1/api/personalisations
+Get a personalisation, recursing to get any referenced if required.            			/v1/api/personalisations
+Upsert one or more personalisations                 	Personalisation[]		/v1/api/personalisations
+
+Delete a group                   			/v1/api/groups/portfolios/{scope}/{groupId}
+Remove a portfolio that is currently present within an existing group           			/v1/api/groups/portfolios/{scope}/{groupId}/portfolios/{portfolioScope}/{portfolioId}
+Remove a subgroup that is currently present within an existing group           			/v1/api/groups/portfolios/{scope}/{groupId}/subgroups/{subgroupScope}/{subgroupId}
+List all groups in a specified scope               			/v1/api/groups/portfolios/{scope}
+Get an existing group                  			/v1/api/groups/portfolios/{scope}/{groupId}
+Lookups a portfolio group.                  			/v1/api/groups/portfolios/{scope}/lookup/{groupName}
+Create a new group                  	PortfolioGroupState		/v1/api/groups/portfolios/{scope}
+Update an existing group                  	PortfolioGroupState		/v1/api/groups/portfolios/{scope}/{groupId}/update
+Add a portfolio to an existing group               	ScopedIdentifier		/v1/api/groups/portfolios/{scope}/{groupId}/portfolios
+Add a sub group to an existing group              	ScopedIdentifier		/v1/api/groups/portfolios/{scope}/{groupId}/subgroups
+
+Delete the details from a portfolio                			/v1/api/portfolios/{scope}/{portfolioId}/details
+Delete a property from a portfolio                			/v1/api/portfolios/{scope}/{portfolioId}/properties
+Delete one or more trades from a portfolio              			/v1/api/portfolios/{scope}/{portfolioId}/trades
+Delete a specific portfolio                  			/v1/api/portfolios/{scope}/{portfolioId}
+Delete a property from a specific trade               			/v1/api/portfolios/{scope}/{portfolioId}/trades/{tradeId}/properties
+Delete one or more properties from the collection of portfolio properties           			/v1/api/portfolios/{scope}/{portfolioId}/properties/all
+Get all portfolios in a scope                		ListPortfolioRootsResponse, IErrorResponse	/v1/api/portfolios/{scope}
+Get a specific portfolio                  		GetPortfolioRootResponse	/v1/api/portfolios/{scope}/{portfolioId}/root
+Get a specific portfolio's details                 		GetPortfolioRootResponse	/v1/api/portfolios/{scope}/{portfolioId}/details
+Get the properties from a portfolio                		GetPortfolioRootResponse	/v1/api/portfolios/{scope}/{portfolioId}/properties
+Get all the trades in a portfolio               		GetPortfolioTradesResponse, IErrorResponse	/v1/api/portfolios/{scope}/{portfolioId}/trades
+Look up a portfolio by its name               		LookupPortfolioRootResponse	/v1/api/portfolios/{scope}/lookup/{name}
+Get the version information for the latest version of the portfolio           			/v1/api/portfolios/{scope}/{portfolioId}/versions/latest
+Get the version information for a portfolio at a specific date           			/v1/api/portfolios/{scope}/{portfolioId}/versions/at
+Get version information for all versions of a specific portfolio            			/v1/api/portfolios/{scope}/{portfolioId}/versions
+Get the aggregate holdings of a portfolio TODO: This should be deprecated and all usages replaced with a call to the AggregationService			/v1/api/portfolios/{scope}/{portfolioId}/holdings
+Create a new portfolio                  	CreatePortfolioRequest	GetPortfolioRootResponse	/v1/api/portfolios/{scope}
+Create a portfolio that derives from an existing portfolio             	Portfolio	GetPortfolioRootResponse	/v1/api/portfolios/{scope}/derived
+Update the details of a specific portfolio               	Portfolio		/v1/api/portfolios/{scope}/{portfolioId}/root
+Add/update details to a portfolio                 	PortfolioDetails	GetPortfolioDetailsResponse	/v1/api/portfolios/{scope}/{portfolioId}/details
+Create one or more properties in a portfolio              	Property[]		/v1/api/portfolios/{scope}/{portfolioId}/properties
+Add trades to a specific portfolio                	Trade[]		/v1/api/portfolios/{scope}/{portfolioId}/trades
+Set the trades in a portfolio between two dates.             	Trade[]		/v1/api/portfolios/{scope}/{portfolioId}/trades/set
+Create trades in a specific portfolio to bring it to the specified holdings         	Holding[]		/v1/api/portfolios/{scope}/{portfolioId}/holdings/{effectiveDate}
+Add one or more properties to a specific trade in a portfolio          	Property[]		/v1/api/portfolios/{scope}/{portfolioId}/trades/{tradeId}/properties
+Add one or more properties to all trades in a portfolio           	Property[]		/v1/api/portfolios/{scope}/{portfolioId}/trades/properties
+Replace the portfolio state with that of a previous version            			/v1/api/portfolios/{scope}/{portfolioId}/versions/{version}/copy
+
+Deletes the property definition.                  			/v1/api/properties/{domain}/{scope}/{name}
+Gets the available property-definition domains.                 			/v1/api/properties
+Gets a property definition.                  			/v1/api/properties/{domain}/{scope}/{name}
+Gets multiple property definitions.                  			/v1/api/properties/{domain}/_keys
+Gets all available property definitions.                 			/v1/api/properties/{domain}
+Gets the available property-definition scopes for the specified domain.             			/v1/api/properties/{domain}/_scopes
+Gets all properties in a scope.                			/v1/api/properties/{domain}/{scope}
+Creates a new property definition.                 	PropertyDefinition		/v1/api/properties
+Updates the specified property definition.                 	PropertyDefinition		/v1/api/properties
+
+Gets a property data format.                 			/v1/api/propertyformats/{scope}/{name}
+Lists all property data formats in the specified scope.             			/v1/api/propertyformats/{scope}
+Upsert a new PropertyDataFormat. Note: Only non-default formats can be created/updated.           			/v1/api/propertyformats/{type}
+
+Delete a specific portfolio                  			/v1/api/reference/{scope}/{portfolioId}
+Get all reference portfolios in a scope               		ListPortfolioRootsResponse	/v1/api/reference/{scope}
+Get all the constituents in a reference portfolio              		ReferencePortfolioConstituentsResponse	/v1/api/reference/{scope}/{referencePortfolioId}/{effectiveDate}/constituents
+Get a reference portfolio by name (as opposed to id)            		ReferencePortfolioConstituentsResponse	/v1/api/reference/{scope}/lookup/{name}
+Create a new reference portfolio                 	Portfolio	ReferencePortfolioResponse	/v1/api/reference/{scope}
+Add constituents to a specific reference portfolio               	ReferencePortfolioConstituent[]		/v1/api/reference/{scope}/{referencePortfolioId}/{effectiveDate}/constituents
+
+Retrieve some previously stored results                 			/v1/api/results/{scope}/{key}/{date}
+Upsert precalculated results against a specified scope/key/date combination              	InsertResultsRequest	CreateAnalyticStoreResponse	/v1/api/results/{scope}/{key}/{date}
+
+Gets the schema for a given entity.               			/v1/api/schema/entities/{entity}
+
+Search property definitions                   			/v1/api/properties/search
+
+Lookup an individual security by supplying a standard market-identifier code (e.g. ISIN).          			/v1/api/securities/lookup/{codeType}/{code}
+Lookup more than one security by supplying a collection of non-Finbourne codes.          	string[]		/v1/api/securities/lookup/{codeType}
+Attempt to delete one or more client securities. Failed securities will be identified in the body of the response.   			/v1/api/securities
+Attempt to create one or more client securities. Failed securities will be identified in the body of the response.   	ClientSecurityDefinitionData[]		/v1/api/securities
+
+    */
+    
     private AnalyticsUrlEndpoint = this.BaseUrl + '/analytics';
     private MetadataUrlEndpoint = this.BaseUrl + '/metadata';
     private ClassificationsUrlEndpoint = this.BaseUrl + '/classifications';
@@ -41,7 +156,14 @@ export class ApiService {
     private ExcelLatestVersionUrl = this.ExcelAddinUrlEndpoint + '/latest-version';
     
     constructor(private http: Http, private _router: Router, private _cookieService: CookieService) { }
-    
+
+    ObtainAuthorizationGrantfromUser(AuthorizationUrl: string): Observable<any> {
+        console.log('Enter: ObtainAuthorizationGrantfromUser Url=' + AuthorizationUrl);
+        return this.http.get(this.AuthorizationUrl)
+            .map((response: Response) => <number>response.json())
+            .do((data: number) => console.log('ObtainAuthorizationGrantfromUser: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+    }
     obtainAccessToken(loginData: LoginData) {
         let params = new URLSearchParams();
         params.append('username', loginData.username);
