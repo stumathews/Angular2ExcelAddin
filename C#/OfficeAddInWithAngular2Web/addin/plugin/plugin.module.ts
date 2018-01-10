@@ -13,7 +13,7 @@ import { ApiService } from './apiService';
 @NgModule({
     imports: [BrowserModule, FormsModule, demoRouting, OfficeModule, OfficeUiModule],
     providers: [ExcelService, ApiService ],
-  declarations: [ OverviewComponent, OfficeInteractionComponent, PortfoliosComponent ],
-  exports: [ OverviewComponent, OfficeInteractionComponent ]
+    declarations: [ OverviewComponent, OfficeInteractionComponent, PortfoliosComponent ],
+    exports: [ OverviewComponent, OfficeInteractionComponent ]
 })
 export class PluginModule { }

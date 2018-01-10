@@ -1,4 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿/* AppComponent.ts
+ * Authenticate and
+ * Sets up Common header and common nav in the app */
+import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -7,10 +10,10 @@ import { CookieService } from 'ngx-cookie';
     templateUrl: 'app.component.html'
 })
 
-export class AppComponent implements OnInit
-{
+export class AppComponent implements OnInit {
     title: string = 'Excel Plugin';
-    navRoutes: Object[] = [{ path: '/OfficeInteraction', title: 'Office interaction page' },
+    navRoutes: Object[] = [
+        { path: '/OfficeInteraction', title: 'Office interaction page' },
         { path: '/Portfolios', title: 'Portfolios' },
         { path: '/Overview', title: 'Overview' }];
 
