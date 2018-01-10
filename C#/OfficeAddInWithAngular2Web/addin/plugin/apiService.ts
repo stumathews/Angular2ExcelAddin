@@ -10,8 +10,6 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch';
 
-
-
 @Injectable()
 export class ApiService {
 
@@ -20,8 +18,27 @@ export class ApiService {
     private AuthorizationUrl = '';
     private ClientId = '';
     private BaseUrl = '';
-    private AggregationUrlEndpoint = this.BaseUrl + '/aggregation';
 
+    /* URL Endpoints */
+    private AggregationUrlEndpoint = this.BaseUrl + '/aggregation';
+    private AnalyticsUrlEndpoint = this.BaseUrl + '/analytics';
+    private MetadataUrlEndpoint = this.BaseUrl + '/metadata';
+    private ClassificationsUrlEndpoint = this.BaseUrl + '/classifications';
+    private ExcelAddinUrlEndpoint = this.BaseUrl + '/excel';
+    private HealthUrlEndpoint = this.BaseUrl + '/health';
+    private LoginUrlEndpoint = this.BaseUrl + '/login';
+    private LogsUrlEndpoint = this.BaseUrl + '/logs';
+    private PersonalisationUrlEndpoint = this.BaseUrl + '/personalisations';
+    private PortfolioGroupsUrlEndpoint = this.BaseUrl + '/groups/portfolios';
+    private PortfoliosUrlEndpoint = this.BaseUrl + '/portfolios';
+    private GetAllPortfoliosUrl = this.PortfoliosUrlEndpoint + '/{scope}';
+    private PropertiesUrlEndpoint = this.BaseUrl + '/properties';
+    private PropertyDataFormatUrlEndpoint = this.BaseUrl + '/propertyformats';
+    private ReferencePortfoliosUrlEndpoint = this.BaseUrl + '/reference';
+    private ResultsUrlEndpoint = this.BaseUrl + '/result';
+    private SearchProxyUrlEndpoint = this.BaseUrl + '/properties/search'; // Not done?
+    private SecuritiesUrlEndpoint = this.BaseUrl + '/securities';
+    private SchemaUrlEndpoint = this.BaseUrl + '/schema';
            
     //Aggregate data from a result set          
     private AggregateFromResultUrl = this.AggregationUrlEndpoint + '/results/{scope}/{resultsKey}/{resultsDate}';
@@ -40,128 +57,123 @@ export class ApiService {
 
     // Aggregation request data in a portfolio into a data tree
     private AggregateportfolioTree = this.AggregationUrlEndpoint + '/portfolios/nested/{scope}/{portfolioId}';
-    private GetAnalyticStore = '/v1/api/analytics/{scope}/{date}';
-    private ListAnalyticStores ='/v1/api/analytics';
-    private CreateAnalyticStore ='/v1/api/analytics/{scope}/{date}';
-    private InsertAnalytics = '/v1/api/analytics/{scope}/{date}/prices';
 
-    private GetCurrentAssemblyVersion ='/v1/api/metadata/version';
-    private GetCurrenBuildVersion = '/v1/api/metadata/buildversion';
-    private GetCurrentConnectivity = '/v1/api/metadata/verifyconnectivity';
+    /* Analytics */
+    private GetAnalyticStore =  this.AnalyticsUrlEndpoint + '/{scope}/{date}';
+    private ListAnalyticStores = this.AnalyticsUrlEndpoint;
+    private CreateAnalyticStore = this.AnalyticsUrlEndpoint + '/{scope}/{date}';
+    private InsertAnalytics = this.AnalyticsUrlEndpoint + '/{scope}/{date}/prices';
 
-    private UpdateclassificationData = '/v1/api/classifications';
+    /* Metadata */
+    private GetCurrentAssemblyVersion = this.MetadataUrlEndpoint + '/version';
+    private GetCurrenBuildVersion = this.MetadataUrlEndpoint + '/buildversion';
+    private GetCurrentConnectivity = this.MetadataUrlEndpoint + '/verifyconnectivity';
 
-    private GetLatestExcelVersion ='/v1/api/excel/latest-version';
-    private GetExcelDownLoadToken = '/v1/api/excel/download-token';
+    /* Classification */
+    private UpdateclassificationData = this.ClassificationsUrlEndpoint + '';
 
-    private GetHealth = '/v1/api/health';
-
-    private GetLoginInfo = '/v1/api/login';
-
-    private StoreLogMessage = '/v1/api/logs/lusidweb';
-
-    private DeletePersonalisation ='/v1/api/personalisations';
-    private GetPersonalisation ='/v1/api/personalisations';
-    private UpsertPersonalisations = '/v1/api/personalisations';
-
-    private Deletegroup ='/v1/api/groups/portfolios/{scope}/{groupId}';
-    private RemovePortfolio ='/v1/api/groups/portfolios/{scope}/{groupId}/portfolios/{portfolioScope}/{portfolioId}';
-    private RemoveSubgroup ='/v1/api/groups/portfolios/{scope}/{groupId}/subgroups/{subgroupScope}/{subgroupId}';
-
-    private ListGroups = '/v1/api/groups/portfolios/{scope}';
-    private GetGroup ='/v1/api/groups/portfolios/{scope}/{groupId}';
-    private LookupsPortfolioGroup ='/v1/api/groups/portfolios/{scope}/lookup/{groupName}';
-    private CreateGroup ='/v1/api/groups/portfolios/{scope}';
-    private UpdateGroup ='/v1/api/groups/portfolios/{scope}/{groupId}/update';
-    private AddportfolioToGroup ='/v1/api/groups/portfolios/{scope}/{groupId}/portfolios';
-    private AddSubgroupToPortfolio ='/v1/api/groups/portfolios/{scope}/{groupId}/subgroups';
-
-    private DeletePortfolioDetails = '/v1/api/portfolios/{scope}/{portfolioId}/details';
-    private DeletePortfolioProperty ='/v1/api/portfolios/{scope}/{portfolioId}/properties';
-
-    private DeletePortfolioTrades = '/v1/api/portfolios/{scope}/{portfolioId}/trades';
-    private DeletePortfolio ='/v1/api/portfolios/{scope}/{portfolioId}';
-    private DeleteTradeProperty ='/v1/api/portfolios/{scope}/{portfolioId}/trades/{tradeId}/properties';
-    private DeletePortfolios ='/v1/api/portfolios/{scope}/{portfolioId}/properties/all';
-
-    private GetPortfolios = '/v1/api/portfolios/{scope}';
-    private GetPortfolio ='/v1/api/portfolios/{scope}/{portfolioId}/root';
-    private GetProtfolioDetails ='/v1/api/portfolios/{scope}/{portfolioId}/details';
-    private GetPortfolioPrties ='/v1/api/portfolios/{scope}/{portfolioId}/properties';
-    private GetPortfolioTrades ='/v1/api/portfolios/{scope}/{portfolioId}/trades';
-    private LookPortfolioByName ='/v1/api/portfolios/{scope}/lookup/{name}';
-
-    private GetPortfolioVersion = '/v1/api/portfolios/{scope}/{portfolioId}/versions/latest';
-    private GetPortfolioVersionByDate ='/v1/api/portfolios/{scope}/{portfolioId}/versions/at';
-    private GetPortfolioVersionAll ='/v1/api/portfolios/{scope}/{portfolioId}/versions';
-    private GetPortfolioAggregateHoldings ='/v1/api/portfolios/{scope}/{portfolioId}/holdings';
-
-    private CreatePortfolio = '/v1/api/portfolios/{scope}';
-    private CreateDerivedPortfolio ='/v1/api/portfolios/{scope}/derived';
-    private UpdatePortfolioDetails ='/v1/api/portfolios/{scope}/{portfolioId}/root';
-    private AddupdatePortfolioDetails ='/v1/api/portfolios/{scope}/{portfolioId}/details';
-    private CreatePortfolioProperty ='/v1/api/portfolios/{scope}/{portfolioId}/properties';
-    private AddPortfolioTrades ='/v1/api/portfolios/{scope}/{portfolioId}/trades';
-    private SetPortfolioTradesDate ='/v1/api/portfolios/{scope}/{portfolioId}/trades/set';
-    private CreatePortfolioTradesSpecifiedHoldings ='/v1/api/portfolios/{scope}/{portfolioId}/holdings/{effectiveDate}';
-    private AddPortfolioTradeProperties ='/v1/api/portfolios/{scope}/{portfolioId}/trades/{tradeId}/properties';
-    private AddPortfolioTradePropertyToAllTrade ='/v1/api/portfolios/{scope}/{portfolioId}/trades/properties';
-    private RevertPortfolioState ='/v1/api/portfolios/{scope}/{portfolioId}/versions/{version}/copy';
-
-    private DeletePropertyDefinition = '/v1/api/properties/{domain}/{scope}/{name}';
-    private GetPropertyDefinitions = '/v1/api/properties';
-    private GetPropertyDefinition = '/v1/api/properties/{domain}/{scope}/{name}';
-    private GetManyPropertyDefinitions ='/v1/api/properties/{domain}/_keys';
-    private GetPropertyDefinitionsByDomain ='/v1/api/properties/{domain}';
-    private GetPropertyDefinitionsByDomainScope ='/v1/api/properties/{domain}/_scopes';
-
-    private GetPropertiesByScope = '/v1/api/properties/{domain}/{scope}';
-    private CreatePropertyDefinition ='/v1/api/properties';
-    private UpdatePropertyDefinition ='/v1/api/properties';
-
-    private GetPropertyDataformat = '/v1/api/propertyformats/{scope}/{name}';
-    private GetPropertyDataformatsByScope ='/v1/api/propertyformats/{scope}';
-    private UpsertPropertyDataFormat ='/v1/api/propertyformats/{type}';
-
-    private DeleteReferencePortfolio = '/v1/api/reference/{scope}/{portfolioId}';
-    private GetReferencePortfoliosByScope ='/v1/api/reference/{scope}';
-    private GetReferencePortfolioConstituents ='/v1/api/reference/{scope}/{referencePortfolioId}/{effectiveDate}/constituents';
-    private GetRreferencePortfolioByName ='/v1/api/reference/{scope}/lookup/{name}';
-    private CreateReferencePortfolio ='/v1/api/reference/{scope}';
-    private AddReferencePortfolioConstituents ='/v1/api/reference/{scope}/{referencePortfolioId}/{effectiveDate}/constituents';
-
-    private GetResults = '/v1/api/results/{scope}/{key}/{date}';
-    private UpsertResultsByCombination = '/v1/api/results/{scope}/{key}/{date}';
-
-    private GetSchemaForEntity = '/v1/api/schema/entities/{entity}';
-    private SearchPropertyDefinitions = '/v1/api/properties/search';
-
-    private LookupSecurityByIsin = '/v1/api/securities/lookup/{codeType}/{code}';
-    private LookupSecurities ='/v1/api/securities/lookup/{codeType}';
-    private DeleteSecurities ='/v1/api/securities';
-    private CreateSecurities ='/v1/api/securities';
-
+    /* Excel Addin */
+    private GetLatestExcelVersion = this.ExcelAddinUrlEndpoint + '/latest-version';
+    private GetExcelDownLoadToken = this.ExcelAddinUrlEndpoint + '/download-token';
     
-    private AnalyticsUrlEndpoint = this.BaseUrl + '/analytics';
-    private MetadataUrlEndpoint = this.BaseUrl + '/metadata';
-    private ClassificationsUrlEndpoint = this.BaseUrl + '/classifications';
-    private ExcelAddinUrlEndpoint = this.BaseUrl + '/excel';
-    private HealthUrlEndpoint = this.BaseUrl + '/health';
-    private LoginUrlEndpoint = this.BaseUrl + '/login';
-    private LogsUrlEndpoint = this.BaseUrl + '/logs';
-    private PersonalisationUrlEndpoint = this.BaseUrl + '/personalisations';
-    private PortfolioGroupsUrlEndpoint = this.BaseUrl + '/groups/portfolios';
-    private PortfoliosUrlEndpoint = this.BaseUrl + '/portfolios';
-    private GetAllPortfoliosUrl = this.PortfoliosUrlEndpoint + '/{scope}';
-    private PropertiesUrlEndpoint = this.BaseUrl + '/properties';
-    private PropertyDataFormatUrlEndpoint = this.BaseUrl + '/propertyformats';
-    private ReferencePortfoliosUrlEndpoint = this.BaseUrl + '/reference';
-    private ResultsUrlEndpoint = this.BaseUrl + '/result';
-    private SearchProxyUrlEndpoint = this.BaseUrl + '/properties/search';
+    /* Health */
+    private GetHealth = this.HealthUrlEndpoint + '';
 
-    private ExcelLatestVersionUrl = this.ExcelAddinUrlEndpoint + '/latest-version';
+    /* Login */
+    private GetLoginInfo = this.LoginUrlEndpoint + '';
+
+    /* Logs */
+    private StoreLogMessage = this.LogsUrlEndpoint + '/lusidweb';
+
+    /* Personalisation */
+    private DeletePersonalisation = this.PersonalisationUrlEndpoint + '';
+    private GetPersonalisation = this.PersonalisationUrlEndpoint + '';
+    private UpsertPersonalisations = this.PersonalisationUrlEndpoint + '';
+
+    /* Portfolio Groups */
+    private Deletegroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}';
+    private RemovePortfolio = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}/portfolios/{portfolioScope}/{portfolioId}';
+    private RemoveSubgroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}/subgroups/{subgroupScope}/{subgroupId}';
+    private ListGroups = this.PortfolioGroupsUrlEndpoint + '/{scope}';
+    private GetGroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}';
+    private LookupsPortfolioGroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/lookup/{groupName}';
+    private CreateGroup = this.PortfolioGroupsUrlEndpoint + '/{scope}';
+    private UpdateGroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}/update';
+    private AddportfolioToGroup = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}/portfolios';
+    private AddSubgroupToPortfolio = this.PortfolioGroupsUrlEndpoint + '/{scope}/{groupId}/subgroups';
+
+    /* Portfolios */
+    private DeletePortfolioDetails = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/details';
+    private DeletePortfolioProperty = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/properties';
+    private DeletePortfolioTrades = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades';
+    private DeletePortfolio = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}';
+    private DeleteTradeProperty = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades/{tradeId}/properties';
+    private DeletePortfolios = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/properties/all';
+    private GetPortfolios = this.PortfoliosUrlEndpoint + '/{scope}';
+    private GetPortfolio = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/root';
+    private GetProtfolioDetails = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/details';
+    private GetPortfolioPrties = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/properties';
+    private GetPortfolioTrades = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades';
+    private LookPortfolioByName = this.PortfoliosUrlEndpoint + '/{scope}/lookup/{name}';
+    private GetPortfolioVersion = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/versions/latest';
+    private GetPortfolioVersionByDate = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/versions/at';
+    private GetPortfolioVersionAll = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/versions';
+    private GetPortfolioAggregateHoldings = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/holdings';
+    private CreatePortfolio = this.PortfoliosUrlEndpoint + '/{scope}';
+    private CreateDerivedPortfolio = this.PortfoliosUrlEndpoint + '/{scope}/derived';
+    private UpdatePortfolioDetails = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/root';
+    private AddupdatePortfolioDetails = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/details';
+    private CreatePortfolioProperty = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/properties';
+    private AddPortfolioTrades = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades';
+    private SetPortfolioTradesDate = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades/set';
+    private CreatePortfolioTradesSpecifiedHoldings = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/holdings/{effectiveDate}';
+    private AddPortfolioTradeProperties = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades/{tradeId}/properties';
+    private AddPortfolioTradePropertyToAllTrade = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/trades/properties';
+    private RevertPortfolioState = this.PortfoliosUrlEndpoint + '/{scope}/{portfolioId}/versions/{version}/copy';
+
+    /* Properties */
+    private DeletePropertyDefinition = this.PropertiesUrlEndpoint + '/{domain}/{scope}/{name}';
+    private GetPropertyDefinitions = this.PropertiesUrlEndpoint + '';
+    private GetPropertyDefinition = this.PropertiesUrlEndpoint + '/{domain}/{scope}/{name}';
+    private GetManyPropertyDefinitions = this.PropertiesUrlEndpoint + '/{domain}/_keys';
+    private GetPropertyDefinitionsByDomain = this.PropertiesUrlEndpoint + '/{domain}';
+    private GetPropertyDefinitionsByDomainScope = this.PropertiesUrlEndpoint + '/{domain}/_scopes';
+    private GetPropertiesByScope = this.PropertiesUrlEndpoint + '/{domain}/{scope}';
+    private CreatePropertyDefinition = this.PropertiesUrlEndpoint + '';
+    private UpdatePropertyDefinition = this.PropertiesUrlEndpoint + '';
+
+    /* Property Dataformat */
+    private GetPropertyDataformat = this.PropertyDataFormatUrlEndpoint + '/{scope}/{name}';
+    private GetPropertyDataformatsByScope = this.PropertyDataFormatUrlEndpoint + '/{scope}';
+    private UpsertPropertyDataFormat = this.PropertyDataFormatUrlEndpoint + '/{type}';
+
+    /* Reference Portfolio */
+    private DeleteReferencePortfolio = this.ReferencePortfoliosUrlEndpoint + '/{scope}/{portfolioId}';
+    private GetReferencePortfoliosByScope = this.ReferencePortfoliosUrlEndpoint + '/{scope}';
+    private GetReferencePortfolioConstituents = this.ReferencePortfoliosUrlEndpoint + '/{scope}/{referencePortfolioId}/{effectiveDate}/constituents';
+    private GetRreferencePortfolioByName = this.ReferencePortfoliosUrlEndpoint + '/{scope}/lookup/{name}';
+    private CreateReferencePortfolio = this.ReferencePortfoliosUrlEndpoint + '/{scope}';
+    private AddReferencePortfolioConstituents = this.ReferencePortfoliosUrlEndpoint + '/{scope}/{referencePortfolioId}/{effectiveDate}/constituents';
+
+    /* Results */
+    private GetResults = this.ResultsUrlEndpoint + '/{scope}/{key}/{date}';
+    private UpsertResultsByCombination = this.ResultsUrlEndpoint + '/{scope}/{key}/{date}';
+
+    /* Schema */
+    private GetSchemaForEntity = this.SchemaUrlEndpoint + '/entities/{entity}';
+
+    /* Property definitions */
+    private SearchPropertyDefinitions = this.PropertiesUrlEndpoint + '/search';
+
+    /* Securities */
+    private LookupSecurityByIsin = this.SearchProxyUrlEndpoint + '/lookup/{codeType}/{code}';
+    private LookupSecurities = this.SearchProxyUrlEndpoint + '/lookup/{codeType}';
+    private DeleteSecurities = this.SearchProxyUrlEndpoint + '';
+    private CreateSecurities = this.SearchProxyUrlEndpoint + '';
     
-    constructor(private http: Http, private _router: Router, private _cookieService: CookieService) { }
+    constructor(private http: Http,
+                private _router: Router,
+                private _cookieService: CookieService) { }
 
     ObtainAuthorizationGrantfromUser(AuthorizationUrl: string): Observable<any> {
         console.log('Enter: ObtainAuthorizationGrantfromUser Url=' + AuthorizationUrl);
@@ -173,7 +185,7 @@ export class ApiService {
     
     // GET one
     GetLatestExcelAddinVersion(): Observable<any> {
-        return this.http.get(this.ExcelLatestVersionUrl)
+        return this.http.get(this.GetLatestExcelVersion)
             .map((response: Response) => <number>response.json())
             .do((data: number) => console.log('ExcelLatestVersionUrl: ' + JSON.stringify(data)))
             .catch(this.handleError);
