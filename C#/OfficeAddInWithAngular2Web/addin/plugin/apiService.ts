@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { EntityTypes } from './Models/EntityTypes';
 import { CookieService, CookieOptions } from 'ngx-cookie';
 import { LoginData } from './Models/LoginData';
-import { ListPortfolioRootsResponse, IErrorResponse  } from '@finbourne/lusidtypes';
+import { ListPortfolioRootsResponse, ErrorResponse  } from '@finbourne/lusidtypes';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch';
@@ -321,11 +321,11 @@ export class ApiService {
     }
     */
 
-    GetAllPortfolios(): Observable<ListPortfolioRootsResponse | IErrorResponse> {
+    GetAllPortfolios(): Observable<ListPortfolioRootsResponse | ErrorResponse> {
         
         console.log('Entry: GetAllPortfolios...');
             return this.http.get(this.GetPortfolios)
-                .map((response: Response) => <ListPortfolioRootsResponse | IErrorResponse>response.json())
+                .map((response: Response) => <ListPortfolioRootsResponse | ErrorResponse>response.json())
                 .do((data => console.log('All: ' + JSON.stringify(data))))
                 .catch(this.handleError);
         

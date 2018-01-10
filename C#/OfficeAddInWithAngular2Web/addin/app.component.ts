@@ -18,7 +18,10 @@ export class AppComponent implements OnInit {
         { path: '/Overview', title: 'Overview' }];
 
     constructor(private readonly CookieService: CookieService) { }
-    
+
+    /**
+     * Authenticate with Okta and store token as cookie in the browser
+     */
     ngOnInit()
     {
         this.CookieService.put("AppComponent", "I'm in!");

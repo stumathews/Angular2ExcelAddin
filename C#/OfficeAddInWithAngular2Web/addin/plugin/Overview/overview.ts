@@ -8,10 +8,9 @@ import { ApiService } from '../apiService';
    
 })
 
-export class OverviewComponent implements OnInit  {
-    
-    title: string = 'Overview';
-    description: string = 'Overview page';
+export class OverviewComponent implements OnInit  {    
+    Title: string = 'Overview';
+    Description: string = 'Overview page';
 
     constructor(private CookieService: CookieService,
                 private ApiService: ApiService) { }

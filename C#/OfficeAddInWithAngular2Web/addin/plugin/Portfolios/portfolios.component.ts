@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../apiService'
-import { ListPortfolioRootsResponse, IErrorResponse  } from '@finbourne/lusidtypes';
+import { ListPortfolioRootsResponse, ErrorResponse  } from '@finbourne/lusidtypes';
 
 @Component({
   moduleId: module.id,
@@ -8,11 +8,11 @@ import { ListPortfolioRootsResponse, IErrorResponse  } from '@finbourne/lusidtyp
   templateUrl: './portfolios.component.html',
 })
 export class PortfoliosComponent implements OnInit {
-    title: string = "List portfolios";
-    description: string = 'These are the portfolios';
+    Title: string = "List portfolios";
+    Description: string = 'These are the portfolios';
     constructor(private apiService: ApiService) { }
     ngOnInit() {
-        this.apiService.GetAllPortfolios().subscribe((value: ListPortfolioRootsResponse | IErrorResponse) => {
+        this.apiService.GetAllPortfolios().subscribe((value: ListPortfolioRootsResponse | ErrorResponse) => {
             /* Deal with response here */
         }, error => {
             /* Deal with error here*/
